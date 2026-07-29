@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e"/>
+      <stop offset="100%" style="stop-color:#0a0a14"/>
+    </linearGradient>
+    <linearGradient id="rust" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f74c00"/>
+      <stop offset="100%" style="stop-color:#b7410e"/>
+    </linearGradient>
+    <radialGradient id="star" cx="42%" cy="38%" r="70%">
+      <stop offset="0%"   style="stop-color:#fff6d8"/>
+      <stop offset="55%"  style="stop-color:#ffd35a"/>
+      <stop offset="100%" style="stop-color:#ff9a3c"/>
+    </radialGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="60%"  style="stop-color:#ffb84d" stop-opacity="0.30"/>
+      <stop offset="100%" style="stop-color:#ffb84d" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <style>
+    @keyframes cross { 0% { transform: translateX(-46px); } 100% { transform: translateX(46px); } }
+    @keyframes dip   { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+    .planet { animation: cross 6s linear infinite; }
+    .trough { animation: dip 6s ease-in-out infinite; }
+  </style>
+
+  <circle cx="128" cy="128" r="120" fill="url(#bg)" stroke="url(#rust)" stroke-width="3"/>
+
+  <!-- The star, and the planet crossing it: a transit, which is how
+       four out of five of them were found -->
+  <circle cx="122" cy="96" r="72" fill="url(#glow)"/>
+  <circle cx="122" cy="96" r="46" fill="url(#star)"/>
+  <g class="planet">
+    <circle cx="122" cy="88" r="12" fill="#12121c"/>
+    <circle cx="122" cy="88" r="12" fill="none" stroke="#69afff" stroke-width="1.2" opacity="0.7"/>
+  </g>
+
+  <!-- The light curve underneath: flat, a dip, flat again -->
+  <path d="M 40 186 L 82 186 L 92 200 L 152 200 L 162 186 L 216 186"
+        fill="none" stroke="#69afff" stroke-width="2.6"
+        stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 92 200 L 152 200" fill="none" stroke="#9fd0ff" stroke-width="3.4"
+        stroke-linecap="round" class="trough"/>
+
+  <text x="128" y="228" font-family="monospace" font-size="20" font-weight="bold"
+        fill="url(#rust)" text-anchor="middle" letter-spacing="1">exoplanets</text>
+  <text x="128" y="241" font-family="monospace" font-size="7.5" fill="#888"
+        text-anchor="middle">the known worlds</text>
+</svg>
