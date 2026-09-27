@@ -1,6 +1,6 @@
 [package]
 name = "exoplanets"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Geir Isene <g@isene.com>"]
 description = "The known exoplanets in your terminal: 5,981 worlds plotted by size against orbit, with their systems. Part of the Fe2O3 suite."

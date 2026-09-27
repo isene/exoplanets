@@ -51,14 +51,14 @@ dependencies = [
 
 [[package]]
 name = "exoplanets"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "fe2o3-crust",
 ]
 
 [[package]]
 name = "fe2o3-crust"
-version = "0.1.46"
+version = "0.1.57"
 dependencies = [
  "crossterm",
  "libc",

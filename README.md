@@ -65,6 +65,7 @@ Or build it: `cargo build --release`. It needs
 | L | List what is in this cell, and pick from it |
 | / | Find a planet or a star |
 | c | Ask Claude about this planet |
+| Ctrl-A | A full Claude session about what is on screen, as in every Fe₂O₃ app |
 | e | Write the catalogue to `~/exoplanets.csv` |
 | r | Redraw from scratch |
 | ? | Help |

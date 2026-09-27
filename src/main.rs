@@ -144,6 +144,14 @@ fn main() {
                     }
                 }
             }
+            // Ctrl+A, as in every Fe2O3 app: a full Claude session about
+            // what is on screen, with the talk so far.
+            "C-A" => {
+                if !crust::claude_session("Exoplanets", "I am in exoplanets, my app of the known exoplanets.", &claude_context(&app)) {
+                    app.say("claude is not on the PATH", ERR_RGB);
+                }
+                Crust::clear_screen();
+            }
             "c" => {
                 let q = footer.ask_or_cancel("ask claude: ", "");
                 print!("{}", Cursor::hide_seq());
@@ -990,6 +998,7 @@ fn show_help(cols: u16, rows: u16) {
            1-6, m            colour: found · temperature · year · distance ·\n    \
                              host star · density\n    \
            c                 ask Claude about this planet\n    \
+           Ctrl-A            a full Claude session about what is on screen\n    \
            e                 write the catalogue to ~/exoplanets.csv\n    \
            ? q               this help · quit\n\n  \
          The numbers are the NASA Exoplanet Archive's composite table, the\n  \
@@ -1103,7 +1112,9 @@ fn claude_run(prompt: &str, input: &str) -> Result<String, String> {
     Ok(String::from_utf8_lossy(&out.stdout).trim().to_string())
 }
 
-fn ask_claude(app: &App, question: &str) -> Result<String, String> {
+/// What the screen shows, for Claude, with the talk so far: the `c`
+/// questions and the Ctrl+A session both start from it.
+fn claude_context(app: &App) -> String {
     let all = &catalog().all;
     let p = app.cur();
     let mut ctx = format!(
@@ -1174,6 +1185,11 @@ fn ask_claude(app: &App, question: &str) -> Result<String, String> {
             ctx.push_str(&format!("User: {q}\nYou: {a}\n\n"));
         }
     }
+    ctx
+}
+
+fn ask_claude(app: &App, question: &str) -> Result<String, String> {
+    let mut ctx = claude_context(app);
     ctx.push_str(&format!("\nQuestion: {question}\n"));
     claude_run(
         "You are an astronomer answering inside a terminal app. Answer in plain text, no \
