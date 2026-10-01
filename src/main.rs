@@ -152,7 +152,7 @@ fn main() {
                 }
                 Crust::clear_screen();
             }
-            "c" => {
+            "c" if crust::CLAUDE => {
                 let q = footer.ask_or_cancel("ask claude: ", "");
                 print!("{}", Cursor::hide_seq());
                 std::io::stdout().flush().ok();
@@ -346,12 +346,12 @@ fn draw(app: &mut App, footer: &mut Pane) -> (u16, u16) {
     draw_header(app, cols);
     draw_plot(app, cols, rows);
     draw_detail(app, cols, rows);
-    footer.say(&style::dim(if cols < 108 {
+    footer.say(&style::dim(&crust::key_help(if cols < 108 {
         "←↓↑→ move · Tab cell · ⏎ system · m colour · / find · ? help · q"
     } else {
         "←↓↑→ move · Tab cell · [ ] system · ⏎ the system · 1-6/m colour · \
          L list · / find · c claude · e csv · ? help · q"
-    }));
+    })));
     print!("{}", Cursor::hide_seq());
     std::io::stdout().flush().ok();
     (cols, rows)
@@ -1015,7 +1015,7 @@ fn show_help(cols: u16, rows: u16) {
     let w = cols.saturating_sub(8).min(80);
     let h = rows.saturating_sub(4).min(34);
     let mut p = Popup::centered(w, h, 252, 234);
-    p.view(&help);
+    p.view(&crust::key_help(help));
 }
 
 // ─────────────────────────── the rest ────────────────────────────────
