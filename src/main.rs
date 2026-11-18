@@ -346,12 +346,12 @@ fn draw(app: &mut App, footer: &mut Pane) -> (u16, u16) {
     draw_header(app, cols);
     draw_plot(app, cols, rows);
     draw_detail(app, cols, rows);
-    footer.say(&style::dim(&crust::key_help(if cols < 108 {
+    footer.say(&crust::with_version(&style::dim(&crust::key_help(if cols < 108 {
         "←↓↑→ move · Tab cell · ⏎ system · m colour · / find · ? help · q"
     } else {
         "←↓↑→ move · Tab cell · [ ] system · ⏎ the system · 1-6/m colour · \
          L list · / find · c claude · e csv · ? help · q"
-    })));
+    })), footer.w as usize, "exoplanets", VERSION));
     print!("{}", Cursor::hide_seq());
     std::io::stdout().flush().ok();
     (cols, rows)
